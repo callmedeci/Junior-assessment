@@ -1,0 +1,7 @@
+{
+  "hosting": {
+    "site": "junior-dev-assessment",
+
+    "public": "public"
+  }
+}
