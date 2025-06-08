@@ -1,11 +1,9 @@
-import { addDoc, collection } from 'firebase/firestore';
 import { useRef } from 'react';
-import { db } from '../firebase/database';
-import { generateContext } from '../utils/ai';
-import { getAuth } from 'firebase/auth';
+import { useMessagesContext } from '../store/MessagesContext';
 
-function ResponseForm({ setState }) {
+function ResponseForm() {
   const ref = useRef(null);
+  const { isAdding, addMessage } = useMessagesContext();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -13,34 +11,17 @@ function ResponseForm({ setState }) {
     const formData = new FormData(e.currentTarget);
     const { message } = Object.fromEntries(formData.entries());
 
-    const auth = getAuth();
-    const { text } = await generateContext(message);
-
-    const newMessage = {
-      message_text: message,
-      response_text: text,
-      timestamp: new Date().getTime(),
-      user_id: auth.currentUser.uid,
-    };
-
-    setState((messages) => [...messages, newMessage]);
-
-    await addDoc(collection(db, 'user_messages'), {
-      message_text: message,
-      response_text: text,
-      timestamp: new Date().getTime(),
-      user_id: auth.currentUser.uid,
-    });
-
+    addMessage(message);
     ref.current.reset();
   }
 
   return (
     <form ref={ref} onSubmit={handleSubmit} className='flex-1'>
       <input
+        disabled={isAdding}
         id='message'
         name='message'
-        className='bg-zinc-700 w-full rounded-full px-5 py-3 focus:outline-none text-zinc-200 placeholder:text-zinc-500'
+        className='bg-zinc-700 w-full rounded-full px-5 py-3 focus:outline-none text-zinc-200 placeholder:text-zinc-500 disabled:opacity-50 disabled:cursor-not-allowed'
         placeholder='Ask something...'
       />
     </form>
