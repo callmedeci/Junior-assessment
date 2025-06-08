@@ -1,7 +1,15 @@
 {
   "hosting": {
+    "public": "dist",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+
     "site": "junior-dev-assessment",
 
-    "public": "public"
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
   }
 }
