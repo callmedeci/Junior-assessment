@@ -2,6 +2,12 @@ import { signInWithPopup } from 'firebase/auth';
 import { auth, provider } from '../firebase/auth';
 import { GoogleLogoIcon } from '@phosphor-icons/react';
 
+/**
+ * @module SignInButton
+ * @description A React component that provides a button for users to sign in
+ * using their Google account via Firebase Authentication.
+ */
+
 function SignInButton() {
   return (
     <button

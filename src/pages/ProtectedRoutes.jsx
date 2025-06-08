@@ -3,6 +3,13 @@ import { useEffect, useState } from 'react';
 import { Outlet } from 'react-router';
 import SignInButton from '../components/SignInBUtton';
 
+/**
+ * @module ProtectedRoutes
+ * @description A React Router component that acts as a guard for routes,
+ * ensuring that only authenticated users can access the nested routes.
+ * It leverages Firebase Authentication to manage user sessions.
+ */
+
 function ProtectedRoutes() {
   const [currentUser, setCurrentUser] = useState(null);
   const auth = getAuth();

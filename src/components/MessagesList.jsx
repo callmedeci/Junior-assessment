@@ -1,6 +1,12 @@
 import { useMessagesContext } from '../store/MessagesContext';
 import Loading from './Loading';
 
+/**
+ * @module MessagesList
+ * @description A React component that displays a list of messages, including loading states and a message item component.
+ * It consumes message data and loading/adding states from `MessagesContext`.
+ */
+
 function MessagesList() {
   const { messages, isLoading, isAdding } = useMessagesContext();
 

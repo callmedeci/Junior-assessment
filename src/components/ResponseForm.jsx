@@ -1,6 +1,12 @@
 import { useRef } from 'react';
 import { useMessagesContext } from '../store/MessagesContext';
 
+/**
+ * @module ResponseForm
+ * @description A React component that provides an input form for users to send messages or questions.
+ * It integrates with the `MessagesContext` to handle message submission and displays a loading state.
+ */
+
 function ResponseForm() {
   const ref = useRef(null);
   const { isAdding, addMessage } = useMessagesContext();
