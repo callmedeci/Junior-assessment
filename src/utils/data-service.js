@@ -1,12 +1,5 @@
 import { getAuth } from 'firebase/auth';
-import {
-  addDoc,
-  collection,
-  getDocs,
-  orderBy,
-  query,
-  where,
-} from 'firebase/firestore';
+import { addDoc, collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebase/database';
 import { generateContext } from './ai';
 
@@ -41,13 +34,7 @@ export async function getSnapShot() {
     throw new Error('User not authenticated. Cannot fetch messages.');
   }
 
-  const q = query(
-    messageCollection,
-    where('user_id', '==', loggedInUserId),
-    orderBy('timestamp', 'asc')
-  );
-
-  const querySnapshot = await getDocs(q);
+  const querySnapshot = await getDocs(messageCollection);
 
   const documents = [];
   querySnapshot.forEach((doc) => {
@@ -56,7 +43,10 @@ export async function getSnapShot() {
     });
   });
 
-  return documents;
+  const userDocs = documents.filter((doc) => doc.user_id === loggedInUserId);
+  const sortedDocs = userDocs.sort((a, b) => a.timestamp - b.timestamp);
+
+  return sortedDocs;
 }
 
 export async function addMessage(message) {
