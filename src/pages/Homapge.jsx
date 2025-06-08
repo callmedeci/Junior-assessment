@@ -25,7 +25,7 @@ function Homepage() {
         </div>
       </div>
 
-      <div className='bg-zinc-800 w-full min-w-3xl max-w-3xl min-h-96 rounded-2xl shadow-md p-5 my-2'>
+      <div className='bg-zinc-800/80 w-full min-w-3xl max-w-3xl min-h-96 rounded-2xl shadow-md my-2 p-2'>
         <MessagesList />
       </div>
 
